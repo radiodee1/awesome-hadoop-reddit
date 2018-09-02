@@ -3,12 +3,18 @@
 
 import sys
 import re
-
+import json
 
 
 def read_input(file):
     for line in file:
         # split the line into words
+        row = json.loads(line)
+
+        body = row['body']
+
+        line = body
+
         yield re.split(r'[.]|[\r]', line)
 
 def main(separator='\t'):
@@ -17,8 +23,6 @@ def main(separator='\t'):
     data = read_input(sys.stdin)
 
     for lines in data:
-
-        #if len(lines) is 1: last_sentence = str(lines[0])
 
         for sentence in lines:
             sentence = sentence.strip()
