@@ -54,13 +54,12 @@ def main(separator='\t'):
     try:
         for current_words, group in groupby(data, itemgetter(0,1,2)):
             current_words = list(current_words)
-            current_words[0] = re.sub('[][)(\n\r#@*^><:|{}]', ' ', current_words[0])
-            current_words[1] = re.sub('[][)(\n\r#@*^><:|{}]', ' ', current_words[1])
+            current_words[0] = re.sub('[][)(\n\r#@*^><:|{},]', '', current_words[0])
+            current_words[1] = re.sub('[][)(\n\r#@*^><:|{},]', '', current_words[1])
 
             try:
                 total_count = clean(current_words[0]) + clean(current_words[1])
-                #total_count = sum(int(count) for current_words, count in group)
-                #total_count = sum(int(current_words[2]) for current_words in group)
+
                 if total_count == 0:
                     print ("%s%s%s%s%d" % (current_words[0].lower(), separator, current_words[1].lower(), separator, total_count))
             except ValueError:
