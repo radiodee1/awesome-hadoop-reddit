@@ -16,7 +16,7 @@ scrape reddit for hadoop
 * hadoop project - `/home/hadoop/hadoop-reddit/`
 * project input - `/home/hadoop/hadoop-input/`
 * project hdfs output - `/home/hadoop/hadoop-output/` (note: not in ext4)
-* hadoop install directory - `/usr/local/hadoop`
+* hadoop install directory - `/usr/local/hadoop/`
 * hadoop hdfs directory - `/opt/hadoop/tmp/`
 
 Ubuntu 18.04, hadoop 3.1.1
