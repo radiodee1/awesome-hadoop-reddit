@@ -20,3 +20,7 @@ scrape reddit for hadoop
 * hadoop hdfs directory - `/opt/hadoop/tmp/`
 
 Ubuntu 18.04, hadoop 3.1.1
+
+## Environment Vars:
+* `export HADOOP_HOME=/usr/local/hadoop`
+* `export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/`
