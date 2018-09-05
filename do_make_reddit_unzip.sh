@@ -2,6 +2,8 @@ cd raw
 
 bunzip2 -k RC_2017-11.bz2
 
+mkdir -p ../data
+
 mv RC_2017-11 ../data/.
 
 cd ../data/
