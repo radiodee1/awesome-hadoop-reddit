@@ -16,6 +16,7 @@ def read_input(file):
         try:
             row = json.loads(line)
         except:
+            row = {}
             row['body'] = ''
             pass
 
