@@ -63,7 +63,7 @@ def main(separator='\t'):
 
     try:
         for current_words , group in groupby(data, itemgetter(0,1,2)):
-
+            
             current_words = list(current_words)
 
             current_words[0] = clean(current_words[0])
@@ -77,7 +77,7 @@ def main(separator='\t'):
             except ValueError:
                 # count was not a number, so silently discard this item
                 pass
-    except KeyboardInterrupt:
+    except IndexError:
         print('Index Error')
         pass
 
