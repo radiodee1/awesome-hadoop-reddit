@@ -6,7 +6,7 @@ from operator import itemgetter
 import sys
 import re
 
-def clean(content):
+def count_faults(content):
     c = content.lower().strip()
     #c = re.sub('[][)(\n\r#@*^><:|{}]', ' ', c)
     c = re.sub("[\"`]", "'", c)
@@ -41,7 +41,17 @@ def clean(content):
 
     out = begin + end + w_period + b_e_w_period + both + amp + link + link2 + www + odd + double + length_sent
 
+    #print(c, 'c', out)
+
     return out
+
+def clean(text):
+    text = re.sub('[][)(\n\r#@*^><:|{},]', '', text)
+    text = re.sub('\?', ' ? ', text)
+    text = re.sub('\.', ' . ', text)
+    text = re.sub( '!', ' ! ', text)
+    return text
+
 
 def read_mapper_output(file, separator='\t'):
     for line in file:
@@ -52,20 +62,23 @@ def main(separator='\t'):
     data = read_mapper_output(sys.stdin, separator=separator)
 
     try:
-        for current_words, group in groupby(data, itemgetter(0,1,2)):
+        for current_words , group in groupby(data, itemgetter(0,1,2)):
+
             current_words = list(current_words)
-            current_words[0] = re.sub('[][)(\n\r#@*^><:|{},]', '', current_words[0])
-            current_words[1] = re.sub('[][)(\n\r#@*^><:|{},]', '', current_words[1])
+
+            current_words[0] = clean(current_words[0])
+            current_words[1] = clean(current_words[1])
 
             try:
-                total_count = clean(current_words[0]) + clean(current_words[1])
+                total_count = count_faults(current_words[0]) + count_faults(current_words[1])
 
                 if total_count == 0:
                     print ("%s%s%s%s%d" % (current_words[0].lower(), separator, current_words[1].lower(), separator, total_count))
             except ValueError:
                 # count was not a number, so silently discard this item
                 pass
-    except IndexError:
+    except KeyboardInterrupt:
+        print('Index Error')
         pass
 
 if __name__ == "__main__":

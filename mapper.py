@@ -4,7 +4,7 @@
 import sys
 import re
 import json
-#from string import punctuation
+from string import punctuation
 
 EMPTY = '--'
 
@@ -21,9 +21,12 @@ def read_input(file):
 
         line = row['body']
 
-        #line = re.sub(r'(?<=['+punctuation+'])\s+(?=[A-Z])', '\n', line)
-        #return line.split('\n')
-        yield re.split(r'[.]|[\r]|[?]|[!]', line)
+        line = re.split('(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', line)
+
+        list.extend(line)
+
+    return list
+        #yield re.split(r'[.]|[\r]|[?]|[!]', line)
 
 
 def main(separator='\t'):
@@ -31,14 +34,15 @@ def main(separator='\t'):
 
     data = read_input(sys.stdin)
 
-    for lines in data:
+    for sentence in data:
+        if True:
 
-        for sentence in lines:
+            sentence = sentence.strip().replace('\r', '')
+
             if last_sentence == EMPTY or len(sentence.strip()) == 0 or len(last_sentence.strip()) == 0:
                 last_sentence = sentence
                 continue
 
-            sentence = sentence.strip()
             print ('%s%s%s%s%d' % (last_sentence, separator, sentence, separator, 1))
             last_sentence = sentence
 
