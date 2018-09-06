@@ -1,18 +1,20 @@
+echo "This could take some time!"
+
 cd raw
 
 bunzip2 -k RC_2017-11.bz2
 
-mkdir -p ../data
+#mkdir -p ../data
 
-mv RC_2017-11 ../data/.
+mv RC_2017-11 ../../hadoop-input/.
 
-cd ../data/
+#cd ../data/
 
-PWD=`pwd`
-echo $PWD
+#PWD=`pwd`
+#echo $PWD
 
-cd ../../hadoop-input
-ln -s $PWD/RC_2017-11 .
+#cd ../../hadoop-input
+#mv $PWD/RC_2017-11 .
 
-ls -hal
+ls -hal ../../hadoop-input/
 
