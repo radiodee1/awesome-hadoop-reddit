@@ -31,3 +31,17 @@ Use this option if you exited the hadoop programs in a less than graceful way. I
 ## Other Commands:
 * `$HADOOP_HOME/bin/hadoop dfs -get /home/hadoop/hadoop-output/part* ~/.` - This copies your output to the root of the home directory for the hadoop user.
 * `$HADOOP_HOME/bin/hadoop dfs -cat /home/hadoop/hadoop-output/*` - This displays all the output on the screen.
+
+I modified `yarn-site.xml` with the following contents:
+```
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
+    <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+  </property>
+```
+
