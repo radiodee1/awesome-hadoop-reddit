@@ -21,9 +21,9 @@ def read_input(file):
             pass
 
         line = row['body'].encode('ascii', 'ignore')
+        line = re.sub(r'[\t]|[\r]|[\n]','', line)
 
         line = re.split('(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', line)
-
         list.extend(line)
 
     return list
