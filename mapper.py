@@ -20,7 +20,7 @@ def read_input(file):
             row['body'] = ''
             pass
 
-        line = row['body']
+        line = row['body'].encode('ascii', 'ignore')
 
         line = re.split('(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', line)
 
