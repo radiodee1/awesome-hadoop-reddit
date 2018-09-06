@@ -25,7 +25,7 @@ Ubuntu 18.04, hadoop 3.1.1
 * `export HADOOP_HOME=/usr/local/hadoop`
 * `export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/`
 
-## `do_make_dfs_0_scrap.sh`:
+## Script - `do_make_dfs_0_scrap.sh`:
 Use this option if you exited the hadoop programs in a less than graceful way. If the dfs is not shut down properly from the last session this script clears the directory with the dfs file system. You will loose any data that you copied to the dfs but you will be able to copy in new data and start over.
 
 ## Other Commands:
