@@ -40,7 +40,13 @@ if __name__ == '__main__':
     lines = []
 
     with open(arg_filename,'r') as z:
-        lines = z.readlines()[arg_start:arg_start + arg_length]
+        num = 0
+        for line in z:
+            if num >= arg_start and num < arg_start + arg_length:
+                lines.append(line)
+            if num > arg_start + arg_length:
+                break
+            num += 1
         z.close()
 
     with open(arg_destination,'w') as z:
