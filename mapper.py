@@ -20,14 +20,13 @@ def read_input(file):
             row['body'] = ''
             pass
 
-        line = row['body'].encode('ascii', 'ignore')
+        line = row['body'].encode('ascii', 'replace') ## ignore?
         line = re.sub(r'[\t]|[\r]|[\n]','', line)
 
         line = re.split('(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', line)
         list.extend(line)
 
     return list
-        #yield re.split(r'[.]|[\r]|[?]|[!]', line)
 
 
 def main(separator='\t'):
