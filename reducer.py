@@ -32,6 +32,7 @@ def count_faults(content):
     www = 0
     odd = 0
     double = 0
+    control = 0
     for z in c:
         begin += len(re.findall(r"^[']+([^']*)", z))
         end += len(re.findall(r"(\w+)[']+$", z))
@@ -44,8 +45,9 @@ def count_faults(content):
         www += len(re.findall(r"^www", z))
         odd += len(re.findall(r"([$%0123456789+=^;:~_/\\])(\w*)", z))
         double += len(re.findall(r"(['])(['])+", z))
+        control += len(re.findall(r'[\x7f\x80]',z))
 
-    out = begin + end + w_period + b_e_w_period + both + amp + link + link2 + www + odd + double + length_sent
+    out = begin + end + w_period + b_e_w_period + both + amp + link + link2 + www + odd + double + length_sent + control
     out += exclamation + question + period
     #print(c, 'c', out)
 
