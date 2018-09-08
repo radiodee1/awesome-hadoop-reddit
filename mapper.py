@@ -23,6 +23,10 @@ def read_input(file):
         line = row['body'].encode('ascii', 'replace') ## ignore?
         line = re.sub(r'[\t]|[\r]|[\n]','', line)
 
+        line = re.sub('\?', ' ? ', line)
+        line = re.sub('\.', ' . ', line)
+        line = re.sub('!', ' ! ', line)
+
         line = re.split('(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', line)
         list.extend(line)
 

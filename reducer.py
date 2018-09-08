@@ -45,7 +45,7 @@ def count_faults(content):
         www += len(re.findall(r"^www", z))
         odd += len(re.findall(r"([$%0123456789+=^;:~_/\\])(\w*)", z))
         double += len(re.findall(r"(['])(['])+", z))
-        control += len(re.findall(r'[\x7f\x80]',z))
+        control += len(re.findall(r'[\x00-\x1f]',z))
 
     out = begin + end + w_period + b_e_w_period + both + amp + link + link2 + www + odd + double + length_sent + control
     out += exclamation + question + period
@@ -55,9 +55,9 @@ def count_faults(content):
 
 def clean(text):
     text = re.sub('[][)(\n\r#@*^><:|{},]', '', text)
-    text = re.sub('\?', ' ? ', text)
-    text = re.sub('\.', ' . ', text)
-    text = re.sub( '!', ' ! ', text)
+    #text = re.sub('\?', ' ? ', text)
+    #text = re.sub('\.', ' . ', text)
+    #text = re.sub( '!', ' ! ', text)
     return text
 
 
