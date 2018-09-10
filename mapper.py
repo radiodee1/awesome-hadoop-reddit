@@ -4,7 +4,7 @@
 import sys
 import re
 import json
-from string import punctuation
+#from string import punctuation
 
 EMPTY = '--'
 
