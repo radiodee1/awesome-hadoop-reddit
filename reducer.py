@@ -8,7 +8,7 @@ import re
 
 def count_faults(content):
     c = content.lower().strip()
-    #c = re.sub('[][)(\n\r#@*^><:|{}]', ' ', c)
+
     c = re.sub("[\"`]", "'", c)
 
     punctuation =  len(re.findall(r'^([!]|[\?]|[\.])',c))
@@ -46,7 +46,7 @@ def count_faults(content):
         control += len(re.findall(r'[\x00-\x1f]',z))
 
     out = begin + end + w_period + b_e_w_period + both + amp + link + link2 + www + odd + double + length_sent + control
-    out += punctuation 
+    out += punctuation
     #print(c, 'c', out)
 
     return out
