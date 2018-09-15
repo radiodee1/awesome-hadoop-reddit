@@ -11,9 +11,7 @@ def count_faults(content):
     #c = re.sub('[][)(\n\r#@*^><:|{}]', ' ', c)
     c = re.sub("[\"`]", "'", c)
 
-    exclamation = len(re.findall(r'! +!', c))
-    period = len(re.findall(r'\. +\.', c))
-    question = len(re.findall(r'\? +\?', c))
+    punctuation =  len(re.findall(r'^([!]|[\?]|[\.])',c))
 
     c = c.split(' ')
 
@@ -48,7 +46,7 @@ def count_faults(content):
         control += len(re.findall(r'[\x00-\x1f]',z))
 
     out = begin + end + w_period + b_e_w_period + both + amp + link + link2 + www + odd + double + length_sent + control
-    out += exclamation + question + period
+    out += punctuation 
     #print(c, 'c', out)
 
     return out
