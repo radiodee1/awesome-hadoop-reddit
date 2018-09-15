@@ -4,6 +4,18 @@ import argparse
 import os
 import sys
 
+hparams = {
+    'save_dir': "~/",
+    'data_dir': "~/",
+    'test_name': "test",
+    'train_name': "train",
+    'valid_name':'valid',
+    'src_ending': "from",
+    'tgt_ending': "to",
+    'question_ending':'ques',
+    'babi_name':'babi'
+}
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='split raw reddit file.')
     parser.add_argument('--filename',help='name of file to split.')
@@ -12,6 +24,7 @@ if __name__ == '__main__':
     parser.add_argument('--triplets',help='record triplets', action='store_true')
     parser.add_argument('--pairs', help='record pairs', action='store_true')
     parser.add_argument('--dummy-question', help='record single dummy question')
+    parser.add_argument('--mode', help='"test", "train", or "valid" (default = "train")')
 
     args = parser.parse_args()
     args = vars(args)
@@ -26,6 +39,12 @@ if __name__ == '__main__':
     arg_pairs = False
     arg_question = ''
     arg_processed = False
+
+    arg_mode = hparams['train_name']
+
+    arg_destination_context = ''
+    arg_destination_question = ''
+    arg_destination_target = ''
 
     if args['filename'] is not None:
         arg_filename = str(args['filename'])
@@ -57,12 +76,20 @@ if __name__ == '__main__':
         arg_question = str(args['dummy_question'])
         arg_processed = True
 
+    if args['mode'] is not None:
+        arg_mode = str(args['mode'])
+        arg_processed = True
+        if arg_mode != 'train' and arg_mode != 'test' and arg_mode != 'valid':
+            print('bad mode')
+            exit()
+
     arg_destination = arg_filename + '.output.txt'
 
     if not arg_processed:
         if arg_length <= 0:
             arg_length = 500
 
+        ''' do split raw file '''
         lines = []
         with open(arg_filename,'r') as z:
             num = 0
@@ -81,10 +108,49 @@ if __name__ == '__main__':
                     z.write('\n')
             z.close()
     else:
-        ''' do split file '''
+        ''' do split processed file '''
         if arg_length <= 0:
             arg_length = 0
+
+        url = arg_destination.split('/')
+        url = '/'.join(url[0:-1])
+        print(url)
+        arg_destination_context = url + '/' + arg_mode +'.'+ hparams['src_ending']
+        arg_destination_target = url + '/' + arg_mode + '.' + hparams['tgt_ending']
+        arg_destination_question = url + '/' +arg_mode + '.' + hparams['question_ending']
         pass
+
+        with open(arg_filename, 'r') as z:
+            num = 0
+            src = open(arg_destination_context, 'w')
+            tgt = open(arg_destination_target, 'w')
+
+            if arg_triplets:
+                ques = open(arg_destination_question, 'w')
+
+            for line in z:
+                if num >= arg_start and (arg_length == 0 or num < arg_start + arg_length):
+                    line = line.split('\t')
+                    src.write(line[0])
+                    if not line[0].endswith('\n'):
+                        src.write('\n')
+                    if arg_triplets:
+                        ques.write(line[0])
+                        if not line[0].endswith('\n'):
+                            ques.write('\n')
+                    tgt.write(line[1])
+                    if not line[1].endswith('\n'):
+                        tgt.write('\n')
+
+                if arg_length != 0 and num > arg_start + arg_length:
+                    print('early stop')
+                    break
+
+                num += 1
+            src.close()
+            tgt.close()
+            ques.close()
+        z.close()
 
 
     print('done.')
