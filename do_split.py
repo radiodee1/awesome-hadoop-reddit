@@ -65,6 +65,7 @@ if __name__ == '__main__':
 
     if args['triplets'] == True:
         arg_triplets = True
+        arg_pairs = False
         arg_processed = True
 
     if args['pairs'] == True:
@@ -149,7 +150,8 @@ if __name__ == '__main__':
                 num += 1
             src.close()
             tgt.close()
-            ques.close()
+            if arg_triplets:
+                ques.close()
         z.close()
 
 
