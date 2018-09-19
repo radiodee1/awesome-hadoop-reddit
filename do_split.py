@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     arg_triplets = False
     arg_pairs = False
-    arg_question = ''
+    arg_question = None #''
     arg_processed = False
 
     arg_mode = hparams['train_name']
@@ -136,6 +136,8 @@ if __name__ == '__main__':
                     if not line[0].endswith('\n'):
                         src.write('\n')
                     if arg_triplets:
+                        if arg_question is not None and arg_question != '':
+                            line[0] = arg_question
                         ques.write(line[0])
                         if not line[0].endswith('\n'):
                             ques.write('\n')
