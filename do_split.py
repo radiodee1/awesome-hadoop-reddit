@@ -81,8 +81,10 @@ if __name__ == '__main__':
         arg_mode = str(args['mode'])
         arg_processed = True
         if arg_mode != 'train' and arg_mode != 'test' and arg_mode != 'valid':
-            print('bad mode')
-            exit()
+            if arg_mode != 'train.babi' and arg_mode != 'test.babi' and arg_mode != 'valid.babi':
+                if arg_mode != 'train.big' and arg_mode != 'test.big' and arg_mode != 'valid.big':
+                    print('bad mode')
+                    exit()
 
     arg_destination = arg_filename + '.output.txt'
 
@@ -116,9 +118,9 @@ if __name__ == '__main__':
         url = arg_destination.split('/')
         url = '/'.join(url[0:-1])
         print(url)
-        arg_destination_context = url + '/' + arg_mode +'.'+ hparams['src_ending']
+        arg_destination_context = url + '/' + arg_mode + '.' + hparams['src_ending']
         arg_destination_target = url + '/' + arg_mode + '.' + hparams['tgt_ending']
-        arg_destination_question = url + '/' +arg_mode + '.' + hparams['question_ending']
+        arg_destination_question = url + '/' + arg_mode + '.' + hparams['question_ending']
         pass
 
         with open(arg_filename, 'r') as z:
