@@ -17,7 +17,7 @@ def count_faults(content):
 
     length_sent = 1
     length_start = len(c)
-    if length_start >= 3: length_sent = 0
+    if length_start >= 4: length_sent = 0
 
     begin = 0
     end = 0
