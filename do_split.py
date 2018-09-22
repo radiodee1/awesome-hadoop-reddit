@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3.6
 
 import argparse
 import os
@@ -25,6 +25,7 @@ if __name__ == '__main__':
     parser.add_argument('--pairs', help='record pairs', action='store_true')
     parser.add_argument('--dummy-question', help='record single dummy question')
     parser.add_argument('--mode', help='"test", "train", or "valid" (default = "train")')
+    parser.add_argument('--zip-file', help='name of zip file to archive to')
 
     args = parser.parse_args()
     args = vars(args)
@@ -37,8 +38,9 @@ if __name__ == '__main__':
 
     arg_triplets = False
     arg_pairs = False
-    arg_question = None #''
+    arg_question = None
     arg_processed = False
+    arg_zip = None #'train-files'
 
     arg_mode = hparams['train_name']
 
@@ -85,6 +87,9 @@ if __name__ == '__main__':
                 if arg_mode != 'train.big' and arg_mode != 'test.big' and arg_mode != 'valid.big':
                     print('bad mode')
                     exit()
+
+    if args['zip_file'] is not None:
+        arg_zip = str(args['zip_file'])
 
     arg_destination = arg_filename + '.output.txt'
 
@@ -158,5 +163,7 @@ if __name__ == '__main__':
                 ques.close()
         z.close()
 
+        if arg_zip is not None:
+            pass
 
     print('done.')
