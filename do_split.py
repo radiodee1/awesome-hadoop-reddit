@@ -24,7 +24,7 @@ if __name__ == '__main__':
     parser.add_argument('--triplets',help='record triplets', action='store_true')
     parser.add_argument('--pairs', help='record pairs', action='store_true')
     parser.add_argument('--dummy-question', help='record single dummy question')
-    parser.add_argument('--mode', help='"test", "train", or "valid" (default = "train")')
+    parser.add_argument('--mode', help='"test", "train", or "valid" - "test.big" and "test.babi" allowed (default = "train")')
     parser.add_argument('--zip-file', help='name of zip file to archive to')
 
     args = parser.parse_args()
@@ -41,6 +41,7 @@ if __name__ == '__main__':
     arg_question = None
     arg_processed = False
     arg_zip = None #'train-files'
+    arg_filelist = []
 
     arg_mode = hparams['train_name']
 
@@ -132,9 +133,12 @@ if __name__ == '__main__':
             num = 0
             src = open(arg_destination_context, 'w')
             tgt = open(arg_destination_target, 'w')
+            arg_filelist.append(arg_destination_context.split('/')[-1])
+            arg_filelist.append(arg_destination_target.split('/')[-1])
 
             if arg_triplets:
                 ques = open(arg_destination_question, 'w')
+                arg_filelist.append(arg_destination_question.split('/')[-1])
 
             for line in z:
                 if num >= arg_start and (arg_length == 0 or num < arg_start + arg_length):
@@ -164,6 +168,9 @@ if __name__ == '__main__':
         z.close()
 
         if arg_zip is not None:
+            os.chdir(url)
+            if len(arg_filelist) > 0:
+                os.system('zip ' + arg_zip.strip() + '.zip ' + ' '.join(arg_filelist))
             pass
 
     print('done.')
