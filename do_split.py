@@ -26,6 +26,7 @@ if __name__ == '__main__':
     parser.add_argument('--dummy-question', help='record single dummy question')
     parser.add_argument('--mode', help='"test", "train", or "valid" - "test.big" and "test.babi" allowed (default = "train")')
     parser.add_argument('--zip-file', help='name of zip file to archive to')
+    parser.add_argument('--autoencode', help='setup files for autoencode operation.', action='store_true')
 
     args = parser.parse_args()
     args = vars(args)
@@ -42,6 +43,7 @@ if __name__ == '__main__':
     arg_processed = False
     arg_zip = None #'train-files'
     arg_filelist = []
+    arg_autoencode = False
 
     arg_mode = hparams['train_name']
 
@@ -92,6 +94,9 @@ if __name__ == '__main__':
     if args['zip_file'] is not None:
         arg_zip = str(args['zip_file'])
 
+    if args['autoencode'] == True:
+        arg_autoencode = True
+
     arg_destination = arg_filename + '.output.txt'
 
     if not arg_processed:
@@ -141,9 +146,11 @@ if __name__ == '__main__':
                 arg_filelist.append(arg_destination_question.split('/')[-1])
 
             for line in z:
+                save = ''
                 if num >= arg_start and (arg_length == 0 or num < arg_start + arg_length):
                     line = line.split('\t')
                     src.write(line[0])
+                    save = line[0][:]
                     if not line[0].endswith('\n'):
                         src.write('\n')
                     if arg_triplets:
@@ -152,6 +159,7 @@ if __name__ == '__main__':
                         ques.write(line[0])
                         if not line[0].endswith('\n'):
                             ques.write('\n')
+                    if arg_autoencode: line[1] = save #line[0]
                     tgt.write(line[1])
                     if not line[1].endswith('\n'):
                         tgt.write('\n')
