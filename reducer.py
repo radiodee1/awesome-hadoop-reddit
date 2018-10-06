@@ -32,7 +32,7 @@ def count_faults(content):
     double = 0
     control = 0
     word = 0
-    
+
     for z in c:
         begin += len(re.findall(r"^[']+([^']*)", z))
         end += len(re.findall(r"(\w+)[']+$", z))

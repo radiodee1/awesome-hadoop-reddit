@@ -1,3 +1,3 @@
 
 
-$HADOOP_HOME/bin/hadoop fs -ls /home/hadoop/hadoop-output
+$HADOOP_HOME/bin/hadoop fs -ls ~/hadoop-output
