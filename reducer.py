@@ -31,6 +31,8 @@ def count_faults(content):
     odd = 0
     double = 0
     control = 0
+    word = 0
+    
     for z in c:
         begin += len(re.findall(r"^[']+([^']*)", z))
         end += len(re.findall(r"(\w+)[']+$", z))
@@ -45,8 +47,11 @@ def count_faults(content):
         double += len(re.findall(r"(['])(['])+", z))
         control += len(re.findall(r'[\x00-\x1f]',z))
 
+        if z == 'm' or z == 's' or z == 't': word = 1
+
     out = begin + end + w_period + b_e_w_period + both + amp + link + link2 + www + odd + double + length_sent + control
     out += punctuation
+    out += word
     #print(c, 'c', out)
 
     return out
