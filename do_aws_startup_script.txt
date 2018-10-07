@@ -1,0 +1,9 @@
+#!/bin/bash
+
+output : { all : '| tee -a /var/log/cloud-init-output.log' }
+
+wget http://files.pushshift.io/reddit/comments/RC_2017-11.bz2
+
+bunzip2 -k RC_2017-11.bz2
+
+## use this script to download Reddit Comments on startup of instance !! ##
