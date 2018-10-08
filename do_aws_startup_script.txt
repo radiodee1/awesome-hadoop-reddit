@@ -6,8 +6,23 @@ wget http://files.pushshift.io/reddit/comments/RC_2017-11.bz2
 
 bunzip2 -k RC_2017-11.bz2
 
-chmod a+rwx RC_2017-11
+chmod a+rw RC_2017-11
 
 git clone https://github.com/radiodee1/awesome-hadoop-reddit.git
 
+###########################################################################
 ## use this script to download Reddit Comments on startup of instance !! ##
+#
+# We use a single instance of aws elastic beanstalk to download the 
+# reddit comments file. Then we move it to s3 storage. Then we start up
+# an EMR cluster and run our mapper and reducer on that.
+#
+# You may ssh into the aws beanstalk ubuntu instance and execute:
+# sudo apt install awscli
+# Then you could move the RC_2017-11 file over to s3 using aws cli tools.
+#
+# On the aws EMR cluster that I used python 3.6 was not available.
+# They use 2.7 or 3.4.
+# mapper.py and reducer.py had to be changed to allow for the
+# available python version.
+###########################################################################
