@@ -1,10 +1,11 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/python
 
-
+#from __future__ import print_function
 from itertools import groupby
 from operator import itemgetter
 import sys
 import re
+
 
 def count_faults(content):
     c = content.lower().strip()

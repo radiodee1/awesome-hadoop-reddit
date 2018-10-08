@@ -6,4 +6,8 @@ wget http://files.pushshift.io/reddit/comments/RC_2017-11.bz2
 
 bunzip2 -k RC_2017-11.bz2
 
+chmod a+rwx RC_2017-11
+
+git clone https://github.com/radiodee1/awesome-hadoop-reddit.git
+
 ## use this script to download Reddit Comments on startup of instance !! ##

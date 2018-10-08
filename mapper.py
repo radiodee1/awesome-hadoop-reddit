@@ -1,10 +1,11 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/python
 
-
+#from __future__ import print_function
 import sys
 import re
 import json
 #from string import punctuation
+
 
 EMPTY = '--'
 
