@@ -25,4 +25,8 @@ git clone https://github.com/radiodee1/awesome-hadoop-reddit.git
 # They use 2.7 or 3.4.
 # mapper.py and reducer.py had to be changed to allow for the
 # available python version.
+#
+# Something else to note, the hadoop cluster needs to create its own
+# output directory. If you specify for hadoop a s3 directory for output 
+# that exists it will crash and you will have to try again.
 ###########################################################################
