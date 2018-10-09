@@ -78,8 +78,8 @@ def main(separator='\t'):
 
             current_words = list(current_words)
 
-            current_words[0] = clean(current_words[0])
-            current_words[1] = clean(current_words[1])
+            current_words[0] = clean(current_words[0]).strip()
+            current_words[1] = clean(current_words[1]).strip()
 
             try:
                 total_count = count_faults(current_words[0]) + count_faults(current_words[1])
