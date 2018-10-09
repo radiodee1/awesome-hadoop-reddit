@@ -49,7 +49,7 @@ def main(separator='\t'):
                 last_sentence = sentence
                 continue
 
-            print ('%s%s%s%s%d' % (last_sentence, separator, sentence, separator, 1))
+            print ('%s%s%s%s%d' % (last_sentence.strip(), separator, sentence.strip(), separator, 1))
             last_sentence = sentence
 
 if __name__ == "__main__":
