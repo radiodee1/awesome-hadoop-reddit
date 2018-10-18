@@ -1,10 +1,11 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/python
 
-
+#from __future__ import print_function
 from itertools import groupby
 from operator import itemgetter
 import sys
 import re
+
 
 def count_faults(content):
     c = content.lower().strip()
@@ -77,8 +78,8 @@ def main(separator='\t'):
 
             current_words = list(current_words)
 
-            current_words[0] = clean(current_words[0])
-            current_words[1] = clean(current_words[1])
+            current_words[0] = clean(current_words[0]).strip()
+            current_words[1] = clean(current_words[1]).strip()
 
             try:
                 total_count = count_faults(current_words[0]) + count_faults(current_words[1])

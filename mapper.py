@@ -1,10 +1,11 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/python
 
-
+#from __future__ import print_function
 import sys
 import re
 import json
 #from string import punctuation
+
 
 EMPTY = '--'
 
@@ -48,7 +49,7 @@ def main(separator='\t'):
                 last_sentence = sentence
                 continue
 
-            print ('%s%s%s%s%d' % (last_sentence, separator, sentence, separator, 1))
+            print ('%s%s%s%s%d' % (last_sentence.strip(), separator, sentence.strip(), separator, 1))
             last_sentence = sentence
 
 if __name__ == "__main__":
