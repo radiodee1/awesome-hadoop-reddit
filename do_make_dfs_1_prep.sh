@@ -2,9 +2,7 @@
 
 export HADOOP_HOME=/usr/local/hadoop
 
-sudo mkdir -p /opt/hadoop/tmp ~/hadoop-input 
-
-sudo chown hadoop:hadoop /opt/hadoop/tmp ~/hadoop-input 
+mkdir -p /home/hadoop/hdfs ~/hadoop-input ~/hadoop-output 
 
 $HADOOP_HOME/bin/hadoop namenode -format
 
