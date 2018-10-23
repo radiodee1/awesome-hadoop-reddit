@@ -1,0 +1,6 @@
+<!-- add this to the mapred-site file !!  -->
+
+<property>
+  <name>mapred.task.timeout</name>
+  <value>1800000</value> <!-- 30 minutes -->
+</property>
