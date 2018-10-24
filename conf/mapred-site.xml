@@ -24,3 +24,8 @@
   <name>mapreduce.reduce.java.opts</name>
   <value>-Xmx12288m</value>
 </property>
+
+<property>
+  <name>mapreduce.task.io.sort.mb</name>
+  <value>512</value>
+</property>
