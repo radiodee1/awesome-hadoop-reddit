@@ -4,3 +4,23 @@
   <name>mapred.task.timeout</name>
   <value>1800000</value> <!-- 30 minutes -->
 </property>
+
+<property>
+  <name>mapreduce.map.memory.mb</name>
+  <value>16384</value>
+</property>
+
+<property>
+  <name>mapreduce.reduce.memory.mb</name>
+  <value>16384</value>
+</property>
+
+<property>
+  <name>mapreduce.map.java.opts</name>
+  <value>-Xmx12288m</value>
+</property>
+
+<property>
+  <name>mapreduce.reduce.java.opts</name>
+  <value>-Xmx12288m</value>
+</property>
