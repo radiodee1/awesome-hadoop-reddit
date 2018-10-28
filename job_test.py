@@ -1,8 +1,8 @@
 #!/usr/bin/python3.6
 
 from __future__ import absolute_import
-import job_mapper
-import job_reducer
+from . import job_mapper
+from . import job_reducer
 
 import mrjob
 from mrjob.job import MRJob
