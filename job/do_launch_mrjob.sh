@@ -8,6 +8,6 @@ $HADOOP_HOME/bin/hadoop dfs -rm -r ~/hadoop-output
 
 #$HADOOP_HOME/bin/hadoop jar $STREAM -input /home/hadoop/hadoop-input -output /home/hadoop/hadoop-output -mapper  ./mapper.py -reducer  ./reducer.py
 
-python3.6 job_test.py -r hadoop < RC_IN.txt > out.txt
+python3.6 job_test.py -r hadoop < ../raw/RC_IN.txt > out.txt
 
 
