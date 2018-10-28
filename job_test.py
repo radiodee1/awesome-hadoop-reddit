@@ -12,14 +12,15 @@ WORD_RE = re.compile(r"[\w']+")
 class JobTest(MRJob):
 
     INPUT_PROTOCOL  = mrjob.protocol.TextValueProtocol
-    OUTPUT_PROTOCOL = mrjob.protocol.TextProtocol
+    OUTPUT_PROTOCOL = mrjob.protocol.TextValueProtocol
     INTERNAL_PROTOCOL = mrjob.protocol.TextProtocol
 
     def steps(self):
         return [
             MRStep(mapper=job_mapper.main,
                    #combiner=self.combiner_count_words,
-                   reducer=job_reducer.main),
+                   reducer=job_reducer.main
+                   ),
             #MRStep(reducer=self.reducer_find_max_word)
         ]
 

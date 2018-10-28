@@ -6,6 +6,8 @@ from operator import itemgetter
 import sys
 import re
 
+EMPTY = '--'
+
 
 def count_faults(content):
     c = content.lower().strip()
@@ -67,32 +69,38 @@ def clean(text):
 
 def read_mapper_output(file, separator='\t'):
     for line in file:
-        yield line.rstrip().split(separator,4)
+        yield line.rstrip().split(separator)
 
 def main(key, data):
     separator = '\t'
 
     data = read_mapper_output(data, separator=separator)
+    last_sentence = EMPTY
 
     #print(list(data))
 
     try:
-        for current_words , group in groupby(data, itemgetter(0, 1, 2)):
 
-            current_words = list(current_words)
+        for z in data:
+            #print(len(z), 'len', key)
+            for sentence in z:
+                if True:
+                    #print(sentence)
+                    sentence = sentence.strip().replace('\r', '')
 
-            current_words[0] = clean(current_words[0]).strip()
-            current_words[1] = clean(current_words[1]).strip()
+                    if last_sentence == EMPTY or len(sentence.strip()) == 0 or len(last_sentence.strip()) == 0:
+                        last_sentence = sentence
+                        continue
 
-            try:
-                total_count = count_faults(current_words[0]) + count_faults(current_words[1])
+                    sentence = clean(sentence).strip()
+                    last_sentence = clean(last_sentence).strip()
 
-                if total_count == 0:
-                    yield (key, current_words[0].lower()+ separator+ current_words[1].lower()+ separator+ str(total_count))
+                    total_count = count_faults(sentence) + count_faults(last_sentence)
 
-            except ValueError:
-                # count was not a number, so silently discard this item
-                pass
+                    if total_count == 0:
+                        yield (key, last_sentence.strip() + separator + sentence.strip() + separator + str(1))
+                    last_sentence = sentence
+
     except IndexError:
         print('Index Error')
         pass

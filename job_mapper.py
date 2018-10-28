@@ -49,7 +49,10 @@ def main(_, data):
     data = read_input([data])
     key = data[0]
     data = data[1]
-
+    data.append(str(1))
+    yield key, separator.join(data)
+    #print(key, separator.join(data))
+    '''
     for sentence in data:
         if True:
 
@@ -61,6 +64,7 @@ def main(_, data):
 
             yield (key,  last_sentence.strip() + separator + sentence.strip() + separator + str(1) )
             last_sentence = sentence
+    '''
 
 if __name__ == "__main__":
     main()
