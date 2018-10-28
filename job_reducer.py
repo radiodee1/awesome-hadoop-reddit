@@ -1,6 +1,6 @@
 #!/usr/bin/python3.6
 
-#from __future__ import print_function
+from __future__ import absolute_import
 from itertools import groupby
 from operator import itemgetter
 import sys

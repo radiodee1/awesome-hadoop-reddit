@@ -1,5 +1,6 @@
 #!/usr/bin/python3.6
 
+from __future__ import absolute_import
 import job_mapper
 import job_reducer
 
