@@ -9,6 +9,15 @@ from mrjob.step import MRStep
 import re
 
 
+'''
+
+execute from the command line with:
+
+python3.6 job_test.py -r hadoop < ../raw/RC_IN.txt > out.txt
+
+'''
+
+
 EMPTY = '--'
 
 
