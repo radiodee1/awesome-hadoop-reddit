@@ -2,6 +2,6 @@
 
 
 
-python3.6 job_test.py -r hadoop < ../raw/RC_IN.txt > out.txt
+python3.6 job_test.py -r hadoop < ../raw/RC_2017-11 > out.txt
 
 
