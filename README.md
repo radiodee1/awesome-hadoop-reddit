@@ -1,5 +1,11 @@
 # hadoop-reddit
-scrape reddit for hadoop
+scrape reddit with hadoop
+
+### Note:
+There are two sets of code in this package. One set uses the java streaming api alone.
+One set uses streaming but also uses a python library called 'MRJob'. This second set
+is surely more interesting and uses code from the first set. Below is
+documentation for running both code examples.
 
 ## Instuctions - Streaming API:
 1. execute download script - `do_make_reddit_download.sh`
@@ -7,9 +13,11 @@ scrape reddit for hadoop
 3. execute data prep script as root - `do_make_dfs_1_prep.sh`
 4. start hadoop - `do_make_start.sh`
 5. execute data copy script - `do_make_dfs_2_copy.sh`
-6. execute hadoop run script - `do_launch_mr.sh`
-7. examine data - `do_make_dfs_3_examine.sh`
-8. stop hadoop - `do_make_stop.sh`
+6. move to streaming directory - `cd stream`
+7. execute hadoop run script - `do_launch_mr.sh`
+8. return to project base directory - `cd ..`
+9. examine data - `do_make_dfs_3_examine.sh`
+10. stop hadoop - `do_make_stop.sh`
 
 ## Instuctions - MRJob:
 1. execute download script - `do_make_reddit_download.sh`
@@ -17,8 +25,10 @@ scrape reddit for hadoop
 3. execute data prep script as root - `do_make_dfs_1_prep.sh`
 4. start hadoop - `do_make_start.sh`
 5. execute data copy script - `do_make_dfs_2_copy.sh`
-6. execute hadoop run script - `do_launch_mr.sh`
-7. examine data - `do_make_dfs_3_examine.sh`
+5. move to job directory - `cd job`
+6. execute hadoop run script - `do_launch_mrjob.sh`
+7. return to project base directory - `cd ..`
+7. examine data - `head job/out.txt`
 8. stop hadoop - `do_make_stop.sh`
 
 ## File System:
