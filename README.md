@@ -13,7 +13,7 @@ documentation for running both code examples.
 3. execute data prep script as root - `do_make_dfs_1_prep.sh`
 4. start hadoop - `do_make_start.sh`
 5. execute data copy script - `do_make_dfs_2_copy.sh`
-6. move to streaming directory - `cd stream`
+6. move to streaming directory - `cd stream/`
 7. execute hadoop run script - `do_launch_mr.sh`
 8. return to project base directory - `cd ..`
 9. examine data - `do_make_dfs_3_examine.sh`
@@ -25,7 +25,7 @@ documentation for running both code examples.
 3. execute data prep script as root - `do_make_dfs_1_prep.sh`
 4. start hadoop - `do_make_start.sh`
 5. execute data copy script - `do_make_dfs_2_copy.sh`
-5. move to job directory - `cd job`
+5. move to job directory - `cd job/`
 6. execute hadoop run script - `do_launch_mrjob.sh`
 7. return to project base directory - `cd ..`
 7. examine data - `head job/out.txt`
