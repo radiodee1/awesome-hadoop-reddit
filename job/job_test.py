@@ -169,7 +169,7 @@ class JobTest(MRJob):
                         total_count = count_faults(sentence) + count_faults(last_sentence)
 
                         if total_count == 0:
-                            yield (key, last_sentence.strip() + separator + sentence.strip() + separator + str(1))
+                            yield (key, last_sentence.strip().lower() + separator + sentence.strip().lower() + separator + str(1))
                         last_sentence = sentence
 
         except IndexError:
