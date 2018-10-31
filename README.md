@@ -23,8 +23,8 @@ documentation for running both code examples.
 1. execute download script - `do_make_reddit_download.sh`
 2. execute download unzip script - `do_make_reddit_unzip.sh`
 3. execute data prep script as root - `do_make_dfs_1_prep.sh`
+4. move the 'RC_2017-11' file back to the 'raw' directory - `mv ~/hadoop-input/RC_2017-11 raw/.`
 4. start hadoop - `do_make_start.sh`
-5. execute data copy script - `do_make_dfs_2_copy.sh`
 5. move to job directory - `cd job/`
 6. execute hadoop run script - `do_launch_mrjob.sh`
 7. return to project base directory - `cd ..`
