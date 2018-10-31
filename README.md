@@ -1,15 +1,25 @@
 # hadoop-reddit
 scrape reddit for hadoop
 
-## Instuctions:
-* execute download script - `do_make_reddit_download.sh`
-* execute download unzip script - `do_make_reddit_unzip.sh`
-* execute data prep script as root - `do_make_dfs_1_prep.sh`
-* start hadoop - `do_make_start.sh`
-* execute data copy script - `do_make_dfs_2_copy.sh`
-* execute hadoop run script - `do_launch_mr.sh`
-* examine data - `do_make_dfs_3_examine.sh`
-* stop hadoop - `do_make_stop.sh`
+## Instuctions - Streaming API:
+1. execute download script - `do_make_reddit_download.sh`
+2. execute download unzip script - `do_make_reddit_unzip.sh`
+3. execute data prep script as root - `do_make_dfs_1_prep.sh`
+4. start hadoop - `do_make_start.sh`
+5. execute data copy script - `do_make_dfs_2_copy.sh`
+6. execute hadoop run script - `do_launch_mr.sh`
+7. examine data - `do_make_dfs_3_examine.sh`
+8. stop hadoop - `do_make_stop.sh`
+
+## Instuctions - MRJob:
+1. execute download script - `do_make_reddit_download.sh`
+2. execute download unzip script - `do_make_reddit_unzip.sh`
+3. execute data prep script as root - `do_make_dfs_1_prep.sh`
+4. start hadoop - `do_make_start.sh`
+5. execute data copy script - `do_make_dfs_2_copy.sh`
+6. execute hadoop run script - `do_launch_mr.sh`
+7. examine data - `do_make_dfs_3_examine.sh`
+8. stop hadoop - `do_make_stop.sh`
 
 ## File System:
 * hadoop user - `/home/hadoop/`
