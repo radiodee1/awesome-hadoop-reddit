@@ -1,11 +1,16 @@
 # hadoop-reddit
 scrape reddit with hadoop
 
-### Note:
+### Note: Project Directories
 There are two sets of code in this package. One set uses the java streaming api alone.
 One set uses streaming but also uses a python library called 'MRJob'. This second set
-is surely more interesting and uses code from the first set. Below is
-documentation for running both code examples.
+is surely more interesting and uses code from the first set. It is found in the 
+`job` directory. Below is documentation for running both code examples.
+
+* `conf` - configuration files that can be used in '/usr/local/hadoop/etc/hadoop'
+* `job` - files for MRJob version of streaming hadoop application
+* `raw` - location of raw reddit file during download and uncompression
+* `stream` - files for simple version of streaming hadoop application
 
 ## Instuctions - Streaming API:
 1. execute download script - `do_make_reddit_download.sh`
@@ -37,7 +42,7 @@ documentation for running both code examples.
 * project input - `/home/hadoop/hadoop-input/`
 * project hdfs output - `/home/hadoop/hadoop-output/` (note: not in ext4)
 * hadoop install directory - `/usr/local/hadoop/`
-* hadoop hdfs directory - `/opt/hadoop/tmp/` (property: hadoop.tmp.dir)
+* hadoop hdfs directory - `/home/hadoop/hdfs/` (property: hadoop.tmp.dir)
 
 Ubuntu 18.04, hadoop 3.1.1
 
