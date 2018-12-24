@@ -208,7 +208,7 @@ if __name__ == '__main__':
                                 if not ques_stagger.endswith('\n'):
                                     ques.write('\n')
                             tgt_stagger = tgt_lst[ii]
-                            if arg_autoencode: tgt_stagger = save  # line[0]
+                            if arg_autoencode: tgt_stagger = word #save  # line[0]
                             tgt.write(tgt_stagger)
                             if not tgt_stagger.endswith('\n'):
                                 tgt.write('\n')
@@ -221,7 +221,7 @@ if __name__ == '__main__':
 
                         src.write(args_end_string + '\n')
                         tgt.write(hparams['eol'] + '\n')
-                        if arg_triplets: 
+                        if arg_triplets:
                             ques.write(args_end_string + '\n')
                         pass
 
