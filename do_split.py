@@ -13,7 +13,8 @@ hparams = {
     'src_ending': "from",
     'tgt_ending': "to",
     'question_ending':'ques',
-    'babi_name':'babi'
+    'babi_name':'babi',
+    'eol': 'eol'
 }
 
 if __name__ == '__main__':
@@ -137,6 +138,8 @@ if __name__ == '__main__':
         arg_destination_context = url + '/' + arg_mode + '.' + hparams['src_ending']
         arg_destination_target = url + '/' + arg_mode + '.' + hparams['tgt_ending']
         arg_destination_question = url + '/' + arg_mode + '.' + hparams['question_ending']
+
+        args_end_string = hparams['eol'] + ' ' + hparams['eol']
         pass
 
         with open(arg_filename, 'r') as z:
@@ -215,7 +218,11 @@ if __name__ == '__main__':
                             if arg_length != 0 and num > arg_start + arg_length:
                                 print('early stop')
                                 break
-
+                                
+                        src.write(args_end_string + '\n')
+                        tgt.write(hparams['eol'] + '\n')
+                        if arg_question is not None:
+                            ques.write(args_end_string + '\n')
                         pass
 
                 if arg_length != 0 and num > arg_start + arg_length:
