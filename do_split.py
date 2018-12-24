@@ -218,10 +218,10 @@ if __name__ == '__main__':
                             if arg_length != 0 and num > arg_start + arg_length:
                                 print('early stop')
                                 break
-                                
+
                         src.write(args_end_string + '\n')
                         tgt.write(hparams['eol'] + '\n')
-                        if arg_question is not None:
+                        if arg_triplets: 
                             ques.write(args_end_string + '\n')
                         pass
 
