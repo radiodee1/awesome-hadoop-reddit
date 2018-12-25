@@ -29,6 +29,7 @@ if __name__ == '__main__':
     parser.add_argument('--zip-file', help='name of zip file to archive to')
     parser.add_argument('--autoencode', help='setup files for autoencode operation.', action='store_true')
     parser.add_argument('--stagger', help='stagger input for P.O.S.-style training.', action='store_true')
+    parser.add_argument('--eol', help='add eol token', action='store_true')
 
     args = parser.parse_args()
     args = vars(args)
@@ -47,6 +48,7 @@ if __name__ == '__main__':
     arg_filelist = []
     arg_autoencode = False
     arg_stagger = False
+    arg_eol = False
 
     arg_mode = hparams['train_name']
 
@@ -102,6 +104,9 @@ if __name__ == '__main__':
 
     if args['stagger'] == True:
         arg_stagger = True
+
+    if args['eol'] == True:
+        arg_eol = True
 
     arg_destination = arg_filename + '.output.txt'
 
@@ -160,6 +165,12 @@ if __name__ == '__main__':
                 save = ''
                 if num >= arg_start and (arg_length == 0 or num < arg_start + arg_length):
                     line = line.split('\t')
+
+                    if arg_eol and len(line[0]) > 1:
+                        line[0] += ' ' + hparams['eol']
+
+                    if arg_eol and len(line[1]) > 1:
+                        line[1] += ' ' + hparams['eol']
 
                     if not arg_stagger:
 
