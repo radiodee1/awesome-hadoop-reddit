@@ -3,6 +3,7 @@
 import argparse
 import os
 import sys
+import random
 
 hparams = {
     'save_dir': "~/",
@@ -40,7 +41,7 @@ if __name__ == '__main__':
     parser.add_argument('--dummy-question', help='record single dummy question')
     parser.add_argument('--mode', help='"test", "train", or "valid" - "test.big" and "test.babi" allowed (default = "train")')
     parser.add_argument('--zip-file', help='name of zip file to archive to')
-    parser.add_argument('--autoencode', help='setup files for autoencode operation.', action='store_true')
+    parser.add_argument('--autoencode', help='setup files for autoencode operation. Set as percentage.')
     parser.add_argument('--stagger', help='stagger input for P.O.S.-style training.', action='store_true')
     parser.add_argument('--eol', help='add eol token', action='store_true')
 
@@ -112,8 +113,8 @@ if __name__ == '__main__':
     if args['zip_file'] is not None:
         arg_zip = str(args['zip_file'])
 
-    if args['autoencode'] == True:
-        arg_autoencode = True
+    if args['autoencode'] is not None:
+        arg_autoencode = float(args['autoencode'])
 
     if args['stagger'] == True:
         arg_stagger = True
@@ -175,6 +176,10 @@ if __name__ == '__main__':
                 print('stagger output.')
 
             for line in z:
+                ## set autoencode here.
+                if random.uniform(0, 1) < arg_autoencode: arg_autoencode = True
+                else: arg_autoencode = False
+
                 save = ''
                 if num >= arg_start and (arg_length == 0 or num < arg_start + arg_length):
                     line = line.split('\t')
