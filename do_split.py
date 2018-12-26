@@ -14,7 +14,8 @@ hparams = {
     'tgt_ending': "to",
     'question_ending':'ques',
     'babi_name':'babi',
-    'eol': 'eol'
+    'eol': 'eol',
+    'unk': 'unk'
 }
 
 if __name__ == '__main__':
@@ -196,12 +197,18 @@ if __name__ == '__main__':
                         save = line[0][:]
                         save_lst = save.split(' ')
                         tgt_lst = line[1].split(' ')
+
+                        while len(save_lst) < len(tgt_lst):
+                            save_lst.append(hparams['unk'])
+
                         for i in range(len(save_lst)):
 
                             word = save_lst[i]
 
-                            if i < len(tgt_lst): ii = i
-                            else: ii = len(tgt_lst) - 1
+                            if i < len(tgt_lst):
+                                ii = i
+                            else:
+                                ii = len(tgt_lst) - 1
 
                             ques_stagger = word
                             if len(src_stagger) > 0: src_stagger += ' '
