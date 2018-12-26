@@ -18,6 +18,18 @@ hparams = {
     'unk': 'unk'
 }
 
+def stop_repeats(lst):
+    j = []
+    k = ''
+    for i in lst.split():
+        if k == i:
+            continue
+        j.append(i)
+        k = i
+
+    return ' '.join(j)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='split raw reddit file.')
     parser.add_argument('--filename',help='name of file to split.')
@@ -198,9 +210,10 @@ if __name__ == '__main__':
                         save_lst = save.split(' ')
                         tgt_lst = line[1].split(' ')
 
-                        while len(save_lst) < len(tgt_lst):
+                        while len(save_lst) <= len(tgt_lst):
                             save_lst.append(hparams['unk'])
 
+                        eol_flag = False
                         for i in range(len(save_lst)):
 
                             word = save_lst[i]
@@ -215,6 +228,7 @@ if __name__ == '__main__':
 
                             src_stagger += word
 
+                            src_stagger = stop_repeats(src_stagger)
                             src.write(src_stagger)
                             save = src_stagger
                             if not src_stagger.endswith('\n'):
@@ -226,8 +240,12 @@ if __name__ == '__main__':
                                 if not ques_stagger.endswith('\n'):
                                     ques.write('\n')
                             tgt_stagger = tgt_lst[ii]
-                            if arg_autoencode: tgt_stagger = word #save  # line[0]
+                            if eol_flag: tgt_stagger = hparams['unk']
+                            if arg_autoencode: tgt_stagger = word
                             tgt.write(tgt_stagger)
+                            if tgt_stagger == hparams['eol']:
+                                eol_flag = True
+
                             if not tgt_stagger.endswith('\n'):
                                 tgt.write('\n')
 
