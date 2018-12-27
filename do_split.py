@@ -176,7 +176,7 @@ if __name__ == '__main__':
                 print('stagger output.')
 
             for line in z:
-                
+
                 ## set autoencode here.
                 auto_flag = False
                 if args['autoencode'] is not None and random.uniform(0, 1) < arg_autoencode: auto_flag = True
