@@ -176,9 +176,11 @@ if __name__ == '__main__':
                 print('stagger output.')
 
             for line in z:
+                
                 ## set autoencode here.
-                if random.uniform(0, 1) < arg_autoencode: arg_autoencode = True
-                else: arg_autoencode = False
+                auto_flag = False
+                if args['autoencode'] is not None and random.uniform(0, 1) < arg_autoencode: auto_flag = True
+                else: auto_flag = False
 
                 save = ''
                 if num >= arg_start and (arg_length == 0 or num < arg_start + arg_length):
@@ -202,7 +204,7 @@ if __name__ == '__main__':
                             ques.write(line[0])
                             if not line[0].endswith('\n'):
                                 ques.write('\n')
-                        if arg_autoencode: line[1] = save #line[0]
+                        if auto_flag: line[1] = save #line[0]
                         tgt.write(line[1])
                         if not line[1].endswith('\n'):
                             tgt.write('\n')
@@ -246,7 +248,7 @@ if __name__ == '__main__':
                                     ques.write('\n')
                             tgt_stagger = tgt_lst[ii]
                             if eol_flag: tgt_stagger = hparams['unk']
-                            if arg_autoencode: tgt_stagger = word
+                            if auto_flag: tgt_stagger = word
                             tgt.write(tgt_stagger)
                             if tgt_stagger == hparams['eol']:
                                 eol_flag = True
