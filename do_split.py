@@ -6,6 +6,7 @@ import sys
 import random
 
 hparams = {
+
     'save_dir': "~/",
     'data_dir': "~/",
     'test_name': "test",
@@ -14,6 +15,7 @@ hparams = {
     'src_ending': "from",
     'tgt_ending': "to",
     'question_ending':'ques',
+    'hist_ending': 'hist',
     'babi_name':'babi',
     'eol': 'eol',
     'unk': 'unk'
@@ -36,6 +38,7 @@ if __name__ == '__main__':
     parser.add_argument('--filename',help='name of file to split.')
     parser.add_argument('--start',help='optional starting line number.')
     parser.add_argument('--length', help='length of output file. (default: 500)')
+    parser.add_argument('--fours', help='record sets of four', action='store_true')
     parser.add_argument('--triplets',help='record triplets', action='store_true')
     parser.add_argument('--pairs', help='record pairs', action='store_true')
     parser.add_argument('--dummy-question', help='record single dummy question')
@@ -54,6 +57,7 @@ if __name__ == '__main__':
     arg_start = 0
     arg_length = -1
 
+    arg_fours = False
     arg_triplets = False
     arg_pairs = False
     arg_question = None
@@ -69,6 +73,7 @@ if __name__ == '__main__':
     arg_destination_context = ''
     arg_destination_question = ''
     arg_destination_target = ''
+    arg_destination_history = ''
 
     if args['filename'] is not None:
         arg_filename = str(args['filename'])
@@ -122,6 +127,13 @@ if __name__ == '__main__':
     if args['eol'] == True:
         arg_eol = True
 
+    if args['fours'] == True:
+        arg_triplets = True
+        arg_fours = True
+        if not arg_stagger:
+            print('not supported')
+            exit()
+
     arg_destination = arg_filename + '.output.txt'
 
     if not arg_processed:
@@ -157,6 +169,8 @@ if __name__ == '__main__':
         arg_destination_context = url + '/' + arg_mode + '.' + hparams['src_ending']
         arg_destination_target = url + '/' + arg_mode + '.' + hparams['tgt_ending']
         arg_destination_question = url + '/' + arg_mode + '.' + hparams['question_ending']
+        arg_destination_history = url + '/' + arg_mode + '.' + hparams['hist_ending']
+
 
         args_end_string = hparams['eol'] + ' ' + hparams['eol']
         pass
@@ -171,6 +185,10 @@ if __name__ == '__main__':
             if arg_triplets:
                 ques = open(arg_destination_question, 'w')
                 arg_filelist.append(arg_destination_question.split('/')[-1])
+
+            if arg_fours:
+                hist = open(arg_destination_history, 'w')
+                arg_filelist.append(arg_destination_history.split('/')[-1])
 
             if arg_stagger:
                 print('stagger output.')
@@ -213,6 +231,7 @@ if __name__ == '__main__':
                         src_stagger = ''
                         tgt_stagger = ''
                         ques_stagger = ''
+                        hist_stagger = ''
                         save = line[0][:]
                         save_lst = save.split(' ')
                         tgt_lst = line[1].split(' ')
@@ -232,8 +251,14 @@ if __name__ == '__main__':
 
                             ques_stagger = word
                             if len(src_stagger) > 0: src_stagger += ' '
-
                             src_stagger += word
+
+                            if len(hist_stagger) > 0: hist_stagger += ' '
+                            if i > 0 and tgt_stagger not in ['\n', hparams['eol'], '', '\t']:
+                                hist_stagger += tgt_stagger
+                            else:
+                                if i != 0: print('bad string')
+                                hist_stagger = ''
 
                             src_stagger = stop_repeats(src_stagger)
                             src.write(src_stagger)
@@ -246,6 +271,10 @@ if __name__ == '__main__':
                                 ques.write(ques_stagger)
                                 if not ques_stagger.endswith('\n'):
                                     ques.write('\n')
+                            if arg_fours:
+                                hist.write(hist_stagger)
+                                if not hist_stagger.endswith('\n'):
+                                    hist.write('\n')
                             tgt_stagger = tgt_lst[ii]
                             if eol_flag: tgt_stagger = hparams['unk']
                             if auto_flag: tgt_stagger = word
@@ -266,6 +295,8 @@ if __name__ == '__main__':
                         tgt.write(hparams['eol'] + '\n')
                         if arg_triplets:
                             ques.write(args_end_string + '\n')
+                        if arg_fours:
+                            hist.write(args_end_string + '\n')
                         pass
 
                 if arg_length != 0 and num > arg_start + arg_length:
@@ -277,6 +308,8 @@ if __name__ == '__main__':
             tgt.close()
             if arg_triplets:
                 ques.close()
+            if arg_fours:
+                hist.close()
         z.close()
 
         if arg_zip is not None:
